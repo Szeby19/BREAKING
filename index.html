@@ -2,43 +2,54 @@
 <html lang="hu">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
   <title>Breaking News — Dienes Evelin felvételt nyert!</title>
   <style>
     :root{--bg:#0b0f1a;--card:#0f1724;--accent:#e11d48;--muted:#9aa4b2}
     html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial}
-    body{background:linear-gradient(180deg,#071024 0%, #081025 60%, #071018 100%);color:#e6eef8;display:grid;place-items:center;padding:32px}
-    .news-card{width:min(980px,94%);background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.02));border-radius:12px;box-shadow:0 10px 40px rgba(2,6,23,0.6);overflow:hidden;border:1px solid rgba(255,255,255,0.04)}
-    header{display:flex;gap:16px;align-items:center;padding:18px 22px;background:linear-gradient(90deg,#0b1220,#091028)}
-    .breaking{background:var(--accent);color:white;padding:8px 12px;border-radius:6px;font-weight:800;letter-spacing:0.06em}
-    h1{margin:0;font-size:1.6rem;line-height:1.05}
-    .sub{color:var(--muted);font-size:0.88rem}
-    .meta{margin-left:auto;text-align:right;color:var(--muted);font-size:0.82rem}
+    body{background:linear-gradient(180deg,#071024 0%, #081025 60%, #071018 100%);color:#e6eef8;display:grid;place-items:center;padding:16px}
+    .news-card{width:min(980px,100%);background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.02));border-radius:12px;box-shadow:0 10px 40px rgba(2,6,23,0.6);overflow:hidden;border:1px solid rgba(255,255,255,0.04)}
+    header{display:flex;gap:12px;align-items:flex-start;padding:16px;background:linear-gradient(90deg,#0b1220,#091028);flex-wrap:wrap}
+    .breaking{background:var(--accent);color:white;padding:6px 10px;border-radius:6px;font-weight:800;letter-spacing:0.06em;font-size:0.85rem}
+    h1{margin:0;font-size:1.3rem;line-height:1.25}
+    .sub{color:var(--muted);font-size:0.8rem;margin-top:4px}
+    .meta{margin-left:auto;text-align:right;color:var(--muted);font-size:0.75rem;min-width:120px}
 
-    .content{display:grid;grid-template-columns:1fr 320px;gap:20px;padding:26px}
-    .article{min-height:260px}
-    .lead{font-size:1.05rem;margin-bottom:12px}
-    .article p{color:#dce9ff;margin:8px 0}
+    .hero-img{width:40%;height:10%;display:block;border-radius:0 0 12px 12px;object-fit:cover;max-height:480px}
 
-    .side{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:16px;border-radius:8px}
-    .badge{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;background:#061428;border-radius:999px;font-weight:700}
-    .trophy{width:56px;height:56px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(180deg,#ffd166,#f6b042);color:#2b1b00;font-weight:900}
+    .content{display:grid;grid-template-columns:1fr 280px;gap:16px;padding:20px}
+    .article{min-height:200px}
+    .lead{font-size:1rem;margin-bottom:12px}
+    .article p{color:#dce9ff;margin:8px 0;font-size:0.95rem;line-height:1.4}
+
+    .side{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:14px;border-radius:8px}
+    .badge{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;background:#061428;border-radius:999px;font-weight:700;font-size:0.85rem}
+    .trophy{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(180deg,#ffd166,#f6b042);color:#2b1b00;font-weight:900;font-size:1.3rem}
 
     .confetti-canvas{position:absolute;left:0;top:0;pointer-events:none}
-    footer{padding:16px 22px;color:var(--muted);font-size:0.9rem;background:linear-gradient(180deg,transparent,rgba(0,0,0,0.06))}
+    footer{padding:14px 20px;color:var(--muted);font-size:0.75rem;background:linear-gradient(180deg,transparent,rgba(0,0,0,0.06))}
 
-    .btn{display:inline-block;padding:10px 14px;border-radius:8px;background:#0ea5a4;color:#021014;text-decoration:none;font-weight:700}
+    .btn{display:inline-block;padding:8px 12px;border-radius:8px;background:#0ea5a4;color:#021014;text-decoration:none;font-weight:700;font-size:0.85rem}
     .pulse{animation:pulse 1.2s infinite}
     @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.03)}100%{transform:scale(1)}}
 
-    /* exclusive interview modal */
     .modal{position:fixed;inset:0;display:grid;place-items:center;background:rgba(2,6,23,0.6);visibility:hidden;opacity:0;transition:all .22s}
     .modal.open{visibility:visible;opacity:1}
-    .modal-card{width:min(760px,94%);background:linear-gradient(180deg,#081428,#0b1530);padding:20px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
-    .close{margin-left:auto;background:#111827;color:#cbd5e1;padding:6px 8px;border-radius:8px;cursor:pointer}
+    .modal-card{width:min(760px,94%);background:linear-gradient(180deg,#081428,#0b1530);padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);max-height:80vh;overflow-y:auto}
+    .close{margin-left:auto;background:#111827;color:#cbd5e1;padding:6px 8px;border-radius:8px;cursor:pointer;font-size:0.8rem}
 
-    /* small screens */
-    @media (max-width:820px){.content{grid-template-columns:1fr}.meta{display:none}}
+    @media (max-width:820px){
+      .content{grid-template-columns:1fr}
+      .meta{text-align:left;margin-left:0;margin-top:8px}
+    }
+    @media (max-width:420px){
+      body{padding:8px}
+      h1{font-size:1.1rem}
+      .article p{font-size:0.9rem}
+      .btn{padding:6px 10px;font-size:0.8rem}
+    }
+    
+
   </style>
 </head>
 <body>
@@ -46,7 +57,7 @@
   <div class="news-card" role="main">
     <header>
       <div class="breaking">BREAKING</div>
-      <div style="display:flex;flex-direction:column">
+      <div style="display:flex;flex-direction:column;flex:1;min-width:200px">
         <h1>BREAKING: Dienes Evelin végre munkát kapott — egy év után!</h1>
         <div class="sub">Exkluzív: a család, a barátok és az internet reakciói</div>
       </div>
@@ -56,12 +67,14 @@
       </div>
     </header>
 
+    <!-- Kiemelt kép -->
+    <img src="evelin.png" alt="Dienes Evelin" class="hero-img" />
+
     <div class="content">
       <article class="article">
         <p class="lead">A helyi közösség örömére: <strong>Dienes Evelin</strong> ma reggel megkezdte új munkahelyén — lezárva ezzel egy több mint 365 napos keresést és rengeteg elutasítást. Ünnepeljünk vele!</p>
 
-        <p>Az új állás betölti a "Félig valós, félig vicces" pozíciót, ahol Evelin minden bizonnyal kamatoztatni fogja türelmét, kitartását és kiváló meméket gyártó képességét. A család 
-        és barátok szerint a felvétel ünneplésére konfettit, süteményt és egy kis túlzó ünneplőbeszédet terveznek.</p>
+        <p>Az új állás betölti a "Félig valós, félig vicces" pozíciót, ahol Evelin minden bizonnyal kamatoztatni fogja türelmét, kitartását és kiváló meméket gyártó képességét.</p>
 
         <p>Exkluzív részletekért nyisd meg az <button class="btn" id="openInterview">interjút</button> — garantáltan csak jó kérdések, és még jobb válaszok.</p>
 
@@ -81,7 +94,7 @@
         </div>
 
         <div style="margin-bottom:12px"><strong>Statisztika</strong></div>
-        <ul style="margin:0 0 12px 18px;color:#d8e9ff">
+        <ul style="margin:0 0 12px 18px;color:#d8e9ff;font-size:0.9rem">
           <li>Idő a keresésre: <strong>365+ nap</strong></li>
           <li>Elutasítások: <strong>túl sok</strong></li>
           <li>Örömfaktor: <strong>százalékos</strong></li>
@@ -95,23 +108,23 @@
     </div>
 
     <footer>
-      <div>Forrás: A család belső közleménye • Szerkesztette: Szebi, a legjobb testvér</div>
+      <div>Forrás: A család belső közleménye • Szerkesztette: Szebi big boss, a legjobb testvér</div>
     </footer>
   </div>
 
   <div class="modal" id="modal">
     <div class="modal-card">
       <div style="display:flex;align-items:center;gap:12px">
-        <div style="font-size:1.1rem;font-weight:800">Exkluzív interjú — Dienes Evelin</div>
+        <div style="font-size:1rem;font-weight:800">Exkluzív interjú — Dienes Evelin</div>
         <button class="close" id="closeModal">Bezár</button>
       </div>
       <hr style="margin:12px 0;border-color:rgba(255,255,255,0.04)" />
       <div>
         <p><strong>Kérdés:</strong> Hogyan érezted magad az elmúlt egy évben?</p>
-        <p><strong>Evelin:</strong> Voltak nehéz napok, de mindig volt valami, ami előre vitt — egy jó kávé, egy vicces mém, vagy egy bíztató üzenet. Ma már elmondhatom: megérte.</p>
+        <p><strong>Evelin:</strong> Voltak nehéz napok, de mindig volt valami, ami előre vitt — egy jó kávé, egy vicces téma , vagy egy bíztató üzenet, vagy épp egy jó cigi. Ma már elmondhatom: megérte.</p>
 
         <p><strong>Kérdés:</strong> Mi a titkod?</p>
-        <p><strong>Evelin:</strong> Kitartás, türelem, és az hogy sosem adtam fel. És persze, a családom támogatása — különösen egy bizonyos testvér :).</p>
+        <p><strong>Evelin:</strong> Kitartás, türelem, és az hogy sosem adtam fel. És persze, a családom támogatása(akiknek a pénz számit csak) — különösen egy bizonyos testvér :).</p>
 
         <p style="margin-top:10px">— Gratulálunk, Evelin! 🎉</p>
       </div>
@@ -119,17 +132,14 @@
   </div>
 
   <script>
-    // Set date to today (localized Hungarian format)
     const d = new Date();
     document.getElementById('date').textContent = d.toLocaleDateString('hu-HU', {year:'numeric',month:'long',day:'numeric'});
 
-    // Modal logic
     const modal = document.getElementById('modal');
     document.getElementById('openInterview').addEventListener('click', ()=> modal.classList.add('open'));
     document.getElementById('closeModal').addEventListener('click', ()=> modal.classList.remove('open'));
     modal.addEventListener('click', (e)=>{ if(e.target===modal) modal.classList.remove('open') });
 
-    // Simple confetti implementation
     const canvas = document.getElementById('confetti');
     const ctx = canvas.getContext('2d');
     let W = canvas.width = window.innerWidth;
@@ -160,19 +170,15 @@
     }
     draw();
 
-    // Celebrate button: brief pulse + tiny sound (optional)
     document.getElementById('celebrateBtn').addEventListener('click', ()=>{
-      // Quick extra confetti burst
       createConfetti(60);
-      // small toast
       const old = document.createElement('div');
       old.textContent = '🎉 Ünnepelünk Evelinnel!';
-      Object.assign(old.style,{position:'fixed',left:'50%',top:'20px',transform:'translateX(-50%)',background:'#081426',padding:'10px 16px',borderRadius:'10px',border:'1px solid rgba(255,255,255,0.04)',zIndex:9999});
+      Object.assign(old.style,{position:'fixed',left:'50%',top:'20px',transform:'translateX(-50%)',background:'#081426',padding:'10px 16px',borderRadius:'10px',border:'1px solid rgba(255,255,255,0.04)',zIndex:9999,color:'#fff',fontSize:'0.9rem'});
       document.body.appendChild(old);
       setTimeout(()=>old.remove(),2200);
     });
 
-    // Share button — copy celebratory text to clipboard
     document.getElementById('shareBtn').addEventListener('click', async ()=>{
       const text = `Breaking: Dienes Evelin végre munkát kapott! Ünnepeljünk vele 🎉`;
       try{await navigator.clipboard.writeText(text); alert('Másolva a vágólapra — most beillesztheted bárhová!');}catch(e){prompt('Másold ki ezt:',text)}
@@ -181,5 +187,3 @@
   </script>
 </body>
 </html>
-
-
