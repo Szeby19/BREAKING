@@ -132,58 +132,58 @@
   </div>
 
   <script>
-    const d = new Date();
-    document.getElementById('date').textContent = d.toLocaleDateString('hu-HU', {year:'numeric',month:'long',day:'numeric'});
+  const d = new Date();
+  document.getElementById('date').textContent = d.toLocaleDateString('hu-HU', {year:'numeric',month:'long',day:'numeric'});
 
-    const modal = document.getElementById('modal');
-    document.getElementById('openInterview').addEventListener('click', ()=> modal.classList.add('open'));
-    document.getElementById('closeModal').addEventListener('click', ()=> modal.classList.remove('open'));
-    modal.addEventListener('click', (e)=>{ if(e.target===modal) modal.classList.remove('open') });
+  const modal = document.getElementById('modal');
+  document.getElementById('openInterview').addEventListener('click', ()=> modal.classList.add('open'));
+  document.getElementById('closeModal').addEventListener('click', ()=> modal.classList.remove('open'));
+  modal.addEventListener('click', (e)=>{ if(e.target===modal) modal.classList.remove('open') });
 
-    const canvas = document.getElementById('confetti');
-    const ctx = canvas.getContext('2d');
-    let W = canvas.width = window.innerWidth;
-    let H = canvas.height = window.innerHeight;
-    window.addEventListener('resize', ()=>{W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight});
+  const canvas = document.getElementById('confetti');
+  const ctx = canvas.getContext('2d');
+  let W = canvas.width = window.innerWidth;
+  let H = canvas.height = window.innerHeight;
+  window.addEventListener('resize', ()=>{W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight});
 
-    function rand(min,max){return Math.random()*(max-min)+min}
-    const pieces = [];
-    const colors = ['#ffd166','#06d6a0','#ef476f','#118ab2','#a8dadc'];
+  function rand(min,max){return Math.random()*(max-min)+min}
+  const pieces = [];
+  const colors = ['#ffd166','#06d6a0','#ef476f','#118ab2','#a8dadc'];
 
-    function createConfetti(count){
-      for(let i=0;i<count;i++){
-        pieces.push({x:rand(0,W),y:rand(-H,0),w:rand(6,12),h:rand(8,18),vx:rand(-1,1),vy:rand(1,4),rot:rand(0,360),speed:rand(0.01,0.04),color:colors[Math.floor(rand(0,colors.length))]});
-      }
+  function createConfetti(count){
+    for(let i=0;i<count;i++){
+      pieces.push({x:rand(0,W),y:rand(-H,0),w:rand(6,12),h:rand(8,18),vx:rand(-1,1),vy:rand(1,4),rot:rand(0,360),speed:rand(0.01,0.04),color:colors[Math.floor(rand(0,colors.length))]});
     }
-    createConfetti(120);
+  }
+  createConfetti(120);
 
-    function draw(){
-      ctx.clearRect(0,0,W,H);
-      for(const p of pieces){
-        p.x += p.vx; p.y += p.vy; p.rot += p.speed*10; p.vy += 0.02;
-        if(p.y>H+30){p.y = rand(-H,0); p.x = rand(0,W); p.vy = rand(1,3)}
-        ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot*Math.PI/180);
-        ctx.fillStyle = p.color; ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
-        ctx.restore();
-      }
-      requestAnimationFrame(draw);
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    for(const p of pieces){
+      p.x += p.vx; p.y += p.vy; p.rot += p.speed*10; p.vy += 0.02;
+      if(p.y>H+30){p.y = rand(-H,0); p.x = rand(0,W); p.vy = rand(1,3)}
+      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot*Math.PI/180);
+      ctx.fillStyle = p.color; ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+      ctx.restore();
     }
-    draw();
+    requestAnimationFrame(draw);
+  }
+  draw();
 
-    document.getElementById('celebrateBtn').addEventListener('click', ()=>{
-      createConfetti(60);
-      const old = document.createElement('div');
-      old.textContent = '🎉 Ünnepelünk Evelinnel!';
-      Object.assign(old.style,{position:'fixed',left:'50%',top:'20px',transform:'translateX(-50%)',background:'#081426',padding:'10px 16px',borderRadius:'10px',border:'1px solid rgba(255,255,255,0.04)',zIndex:9999,color:'#fff',fontSize:'0.9rem'});
-      document.body.appendChild(old);
-      setTimeout(()=>old.remove(),2200);
-    });
+  document.getElementById('celebrateBtn').addEventListener('click', ()=>{
+    createConfetti(60);
+    const old = document.createElement('div');
+    old.textContent = '🎉 Ünnepelünk Evelinnel!';
+    Object.assign(old.style,{position:'fixed',left:'50%',top:'20px',transform:'translateX(-50%)',background:'#081426',padding:'10px 16px',borderRadius:'10px',border:'1px solid rgba(255,255,255,0.04)',zIndex:9999,color:'#fff',fontSize:'0.9rem'});
+    document.body.appendChild(old);
+    setTimeout(()=>old.remove(),2200);
+  });
 
-    document.getElementById('shareBtn').addEventListener('click', async ()=>{
-      const text = `Breaking: Dienes Evelin végre munkát kapott! Ünnepeljünk vele 🎉`;
-      try{await navigator.clipboard.writeText(text); alert('Másolva a vágólapra — most beillesztheted bárhová!');}catch(e){prompt('Másold ki ezt:',text)}
-    });
+  // 🔴 Rickroll a Megosztás gombra
+  document.getElementById('shareBtn').addEventListener('click', ()=>{
+    window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank");
+  });
+</script>
 
-  </script>
 </body>
 </html>
